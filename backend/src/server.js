@@ -56,11 +56,16 @@ app.post("/chat", async (req, res) => {
 
   try {
     const embedding = await createEmbedding(query);
-    const jobs = await searchJobs(embedding, 5);
-    const answer = jobs.length
-      ? await generateAnswer(query, jobs)
-      : "I couldn't find any matching jobs. Try a different description or skill set.";
-    res.json({ query, answer, jobs });
+    const candidates = await searchJobs(embedding, 5);
+  
+    const generated = candidates.length
+      ? await generateAnswer(query, candidates)
+      : { answer: "I couldn't find any matching jobs. Try a different description or skill set.", relevantJobIds: [] };
+
+    const relevantIds = new Set((generated.relevantJobIds || []).map(Number));
+    const jobs = candidates.filter((job) => relevantIds.has(Number(job.id)));
+
+    res.json({ query, answer: generated.answer, jobs });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
