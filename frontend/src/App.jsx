@@ -4,7 +4,7 @@ const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 const ideas = [
   "Python backend developer with AWS experience",
   "Entry-level data analyst who enjoys working with SQL",
-  "Remote product designer at a small company",
+  "Remote product designer",
 ];
 
 export default function Home() {
@@ -115,7 +115,6 @@ export default function Home() {
               <button disabled={loading || !input.trim()} className="rounded-xl bg-emerald-800 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-900 disabled:opacity-40">{loading ? "Searching" : "Search jobs"}</button>
             </div>
           </form>
-          <p className="mt-3 text-center text-xs text-slate-400">Sample listings for learning and demonstration.</p>
         </div>
       </section>
     </main>
