@@ -1,4 +1,4 @@
-# RoleMatch — Semantic Job Search
+# RoleMatch — RAG Job Search chatbot.
 
 A small beginner project that finds sample job listings from a natural-language description. It demonstrates how text embeddings and Qdrant similarity search work, with a simple chat-style React interface.
 
